@@ -102,7 +102,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 */ /*!50003 TRIGGER `game_status_update` BEFORE UPDATE ON `adise19_chess1`.`game_status` FOR EACH ROW BEGIN
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `game_status_update` BEFORE UPDATE ON `adise19_chess1`.`game_status` FOR EACH ROW BEGIN
 		set NEW.last_change = now();
     END */;;
 DELIMITER ;
@@ -148,7 +148,7 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
 DELIMITER ;;
-CREATE  PROCEDURE `clean_board`()
+CREATE DEFINER=`asidirop`@`%` PROCEDURE `clean_board`()
 BEGIN
 	replace into board select * from board_empty;
     END ;;
@@ -167,7 +167,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
 DELIMITER ;;
-CREATE  PROCEDURE `move_piece`(x1 tinyint,y1 tinyint,x2 tinyint,y2 tinyint)
+CREATE DEFINER=`asidirop`@`%` PROCEDURE `move_piece`(x1 tinyint,y1 tinyint,x2 tinyint,y2 tinyint)
 BEGIN
 	declare  p, p_color char;
 	
@@ -198,7 +198,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
 DELIMITER ;;
-CREATE  PROCEDURE `test_move`()
+CREATE DEFINER=`asidirop`@`%` PROCEDURE `test_move`()
 BEGIN
 SELECT * FROM
 board B1 INNER JOIN board B2
@@ -221,4 +221,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-04 11:01:15
+-- Dump completed on 2019-12-04 16:30:32
